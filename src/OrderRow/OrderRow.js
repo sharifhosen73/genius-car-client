@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const OrderRow = ({ order }) => {
-  const { service, serviceName, price, customer, phone } = order;
+const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
+  const { _id, service, serviceName, price, customer, phone, status } = order;
   const [orderService, setOrderService] = useState({});
 
   useEffect(() => {
@@ -14,7 +14,10 @@ const OrderRow = ({ order }) => {
     <tbody>
       <tr>
         <th className="text-2xl">
-          <button className="btn btn-square btn-outline">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn btn-square btn-outline"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -56,7 +59,12 @@ const OrderRow = ({ order }) => {
         </td>
         <td>Purple</td>
         <th>
-          <button className="btn btn-ghost btn-xs">details</button>
+          <button
+            onClick={() => handleStatusUpdate(_id)}
+            className="btn btn-ghost btn-xs"
+          >
+            {status ? status : "Pending"}
+          </button>
         </th>
       </tr>
     </tbody>
